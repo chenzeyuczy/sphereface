@@ -14,11 +14,10 @@
 
 function evaluation()
 
-clear;clc;close all;
-cd('../')
+clear;close all;
 
 %% caffe setttings
-matCaffe = fullfile(pwd, '../tools/caffe-sphereface/matlab');
+matCaffe = fullfile(pwd, './tools/caffe-sphereface/matlab');
 addpath(genpath(matCaffe));
 gpu = 1;
 if gpu
@@ -30,8 +29,8 @@ else
 end
 caffe.reset_all();
 
-model   = '../train/code/sphereface_deploy.prototxt';
-weights = '../train/result/sphereface_model_iter_28000.caffemodel';
+model   = './train/sphereface_deploy.prototxt';
+weights = './result/sphereface_model_ms10w_iter_20000.caffemodel';
 net     = caffe.Net(model, weights, 'test');
 net.save('result/sphereface_model.caffemodel');
 

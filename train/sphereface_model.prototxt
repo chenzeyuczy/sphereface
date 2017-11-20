@@ -1,4 +1,5 @@
 name: "SpherefaceNet-20"
+
 layer {
   name: "data"
   type: "ImageData"
@@ -12,9 +13,11 @@ layer {
     mirror: true
   }
   image_data_param {
-    source: "data/CASIA-WebFace-112X96.txt"
+    source: "./data/ms_10w_resize_list.txt"
     batch_size: 256
     shuffle: true
+#	new_height: 112
+#	new_width: 96
   }
 }
 ############## CNN Architecture ###############
@@ -811,7 +814,8 @@ layer {
     decay_mult: 1
   }
   margin_inner_product_param {
-    num_output: 10572
+#    num_output: 10572
+    num_output: 73565
     type: QUADRUPLE
     weight_filler {
       type: "xavier"
@@ -822,6 +826,9 @@ layer {
     lambda_min: 5
     iteration: 0
   }
+#  include {
+#    phase: train
+#  }
 }
 layer {
   name: "softmax_loss"
@@ -829,4 +836,7 @@ layer {
   bottom: "fc6"
   bottom: "label"
   top: "softmax_loss"
+#  include {
+#    phase: train
+#  }
 }

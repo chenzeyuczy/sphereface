@@ -14,7 +14,7 @@
 function face_align_demo()
 
 clear;clc;close all;
-cd('../');
+% cd('../');
 
 load('result/dataList.mat')
 %% alignment settings

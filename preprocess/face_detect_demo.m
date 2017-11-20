@@ -21,11 +21,10 @@
 function face_detect_demo()
 
 clear;clc;close all;
-cd('../');
 
 %% collect a image list of CASIA & LFW
-trainList = collectData(fullfile(pwd, 'data/CASIA-WebFace'), 'CASIA-WebFace');
-testList  = collectData(fullfile(pwd, 'data/lfw'), 'lfw');
+% trainList = collectData(fullfile(pwd, 'data/CASIA-WebFace'), 'CASIA-WebFace');
+testList  = collectData(fullfile(pwd, '../data/lfw'), 'lfw');
 
 %% mtcnn settings
 minSize   = 20;
@@ -59,7 +58,8 @@ ONet = caffe.Net(fullfile(modelPath, 'det3.prototxt'), ...
                  fullfile(modelPath, 'det3.caffemodel'), 'test');
 
 %% face and facial landmark detection
-dataList = [trainList; testList];
+% dataList = [trainList; testList];
+dataList = testList;
 for i = 1:length(dataList)
     fprintf('detecting the %dth image...\n', i);
     % load image
@@ -83,7 +83,7 @@ for i = 1:length(dataList)
        dataList(i).facial5point = [];
     end
 end
-save result/dataList.mat dataList
+save ../result/dataList.mat dataList
 
 end
 
